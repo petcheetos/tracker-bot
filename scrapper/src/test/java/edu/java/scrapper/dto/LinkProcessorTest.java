@@ -1,12 +1,12 @@
 package edu.java.scrapper.dto;
 
 import edu.java.utils.LinkProcessor;
+import org.junit.Test;
+
 import java.net.URI;
 import java.util.List;
-import org.junit.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class LinkProcessorTest {
 

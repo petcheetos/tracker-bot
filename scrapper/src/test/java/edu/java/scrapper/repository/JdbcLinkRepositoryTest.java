@@ -4,15 +4,17 @@ import edu.java.models.LinkResponse;
 import edu.java.repository.ChatRepository;
 import edu.java.repository.jdbc.JdbcLinkRepository;
 import edu.java.scrapper.IntegrationTest;
-import java.net.URI;
-import java.time.OffsetDateTime;
-import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.net.URI;
+import java.time.OffsetDateTime;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 

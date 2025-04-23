@@ -4,13 +4,15 @@ import edu.java.exception.RequestException;
 import edu.java.scrapper.IntegrationTest;
 import edu.java.services.jdbc.JdbcChatService;
 import edu.java.services.jdbc.JdbcLinkService;
-import java.net.URI;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.net.URI;
+
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
