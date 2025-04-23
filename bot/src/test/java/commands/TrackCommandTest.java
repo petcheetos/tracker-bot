@@ -1,9 +1,8 @@
 package commands;
 
+import edu.java.bot.commands.Command;
+import edu.java.bot.commands.TrackCommand;
 import org.junit.jupiter.api.Test;
-import ru.spbstu.commands.Command;
-import ru.spbstu.commands.TrackCommand;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TrackCommandTest {
@@ -18,6 +17,4 @@ public class TrackCommandTest {
     void testStartDescription() {
         assertThat(track.description()).isNotBlank();
     }
-
-    //void testExecute()
 }

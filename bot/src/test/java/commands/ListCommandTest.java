@@ -1,10 +1,8 @@
 package commands;
 
-
+import edu.java.bot.commands.Command;
+import edu.java.bot.commands.ListCommand;
 import org.junit.jupiter.api.Test;
-import ru.spbstu.commands.Command;
-import ru.spbstu.commands.ListCommand;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ListCommandTest {
@@ -19,8 +17,4 @@ public class ListCommandTest {
     void testListDescription() {
         assertThat(list.description()).isNotBlank();
     }
-
-    //void testExecute()
-
-    //void testExecuteWithEmptyList()
 }
