@@ -1,11 +1,11 @@
 package commands;
 
+import edu.java.bot.commands.*;
+import edu.java.bot.configuration.CommandConfig;
+import edu.java.bot.services.BotCommandService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import ru.spbstu.commands.*;
-import ru.spbstu.configurations.CommandConfig;
-import ru.spbstu.services.BotCommandService;
 
 import java.util.List;
 

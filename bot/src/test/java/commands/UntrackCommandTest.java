@@ -1,8 +1,8 @@
 package commands;
 
+import edu.java.bot.commands.Command;
+import edu.java.bot.commands.UntrackCommand;
 import org.junit.jupiter.api.Test;
-import ru.spbstu.commands.Command;
-import ru.spbstu.commands.UntrackCommand;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,6 +18,4 @@ public class UntrackCommandTest {
     void testStartDescription() {
         assertThat(untrack.description()).isNotBlank();
     }
-
-    //void testExecute()
 }
