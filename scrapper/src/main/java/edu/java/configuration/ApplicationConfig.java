@@ -23,7 +23,7 @@ public record ApplicationConfig(
     @NotNull
     AccessType databaseAccessType
 ) {
-    public record Scheduler(boolean enable, @NotNull Duration interval, @NotNull Duration forceCheckDelay) {
+    public record Scheduler(boolean enable, @NotNull Duration interval) {
     }
 
     public record GithubBaseUrl(@NotNull String baseUrl) {

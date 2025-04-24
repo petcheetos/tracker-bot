@@ -2,14 +2,20 @@ app:
   database-access-type: jpa
   scheduler:
     enable: true
-    interval: "PT10M"
-    force-check-delay: "PT60M"
+    interval: "PT5M"
   github-base-url:
     base-url: "https://api.github.com/repos/"
   stackoverflow-base-url:
     base-url: "https://api.stackexchange.com/2.3/questions/"
   bot-base-url:
     base-url: "http://localhost:8090"
+
+api:
+  bot:
+    retry-policy: constant
+    attempts: 3
+    http-statuses: INTERNAL_SERVER_ERROR, BAD_GATEWAY, SERVICE_UNAVAILABLE, GATEWAY_TIMEOUT
+    interval: 5000
 
 spring:
   application:
@@ -33,3 +39,6 @@ logging:
 springdoc:
   swagger-ui:
     path: /swagger-ui
+
+bucket:
+  count: 10
