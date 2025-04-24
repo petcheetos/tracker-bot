@@ -1,14 +1,17 @@
 package commands;
 
-import edu.java.bot.commands.*;
+import edu.java.bot.commands.Command;
+import edu.java.bot.commands.HelpCommand;
+import edu.java.bot.commands.ListCommand;
+import edu.java.bot.commands.StartCommand;
+import edu.java.bot.commands.TrackCommand;
+import edu.java.bot.commands.UntrackCommand;
 import edu.java.bot.configuration.CommandConfig;
 import edu.java.bot.services.BotCommandService;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
