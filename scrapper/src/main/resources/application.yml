@@ -2,7 +2,7 @@ app:
   database-access-type: jdbc
   scheduler:
     enable: true
-    interval: "P5M"
+    interval: "PT5M"
   github-base-url:
     base-url: "https://api.github.com/repos/"
   stackoverflow-base-url:
