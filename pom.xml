@@ -188,10 +188,10 @@
                     </executions>
                     <configuration>
                         <verbose>true</verbose>
+                        <failOnNoGitDirectory>false</failOnNoGitDirectory>
                         <dateFormat>yyyy-MM-dd'T'HH:mm:ssZ</dateFormat>
                         <generateGitPropertiesFile>true</generateGitPropertiesFile>
-                        <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties
-                        </generateGitPropertiesFilename>
+                        <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>
                     </configuration>
                 </plugin>
 

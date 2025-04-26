@@ -17,7 +17,9 @@ public class JdbcChatRepository implements ChatRepository {
 
     @Override
     public void add(Long chatId) {
-        jdbcTemplate.update("insert into chat (id) values (?)", chatId);
+        if (!exist(chatId)) {
+            jdbcTemplate.update("insert into chat (id) values (?)", chatId);
+        }
     }
 
     @Override

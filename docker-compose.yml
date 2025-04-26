@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  ci:
+    build:
+      context: .
+      dockerfile: Dockerfile.ci
+    volumes:
+      - ./:/workspace
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - TESTCONTAINERS_RYUK_DISABLED=true
+    depends_on:
+      []
+
+  postgresql:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: scrapper
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 1s
+      retries: 30
+
+  liquibase:
+    image: liquibase/liquibase:4.25
+    depends_on:
+      postgresql:
+        condition: service_healthy
+    command:
+      - --changelog-file=master.xml
+      - --driver=org.postgresql.Driver
+      - --url=jdbc:postgresql://postgresql:5432/scrapper
+      - --username=postgres
+      - --password=postgres
+      - update
+    volumes:
+      - ./migrations:/liquibase/changelog
+
+  scrapper:
+    build:
+      context: ./scrapper
+      dockerfile: Dockerfile
+    depends_on:
+      postgresql:
+        condition: service_healthy
+      liquibase:
+        condition: service_completed_successfully
+      ci:
+        condition: service_completed_successfully
+    ports:
+      - "8080:8080"
+
+  bot:
+    build:
+      context: ./bot
+      dockerfile: Dockerfile
+    depends_on:
+      scrapper:
+        condition: service_healthy
+    environment:
+      - TOKEN=${TOKEN}
+    ports:
+      - "8090:8090"

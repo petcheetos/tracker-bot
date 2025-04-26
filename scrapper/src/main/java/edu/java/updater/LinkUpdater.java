@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 public class LinkUpdater {
-    private final int minutes = 5;
+    private final int minutes = 2;
     private final LinkRepository linkRepository;
     private final BotClient botClient;
     private final LinkProcessor linkProcessor;
