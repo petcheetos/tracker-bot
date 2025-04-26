@@ -39,6 +39,7 @@ logging:
 springdoc:
   swagger-ui:
     path: /swagger-ui
-
+  api-docs:
+    path: /v1/api-docs
 bucket:
   count: 10
