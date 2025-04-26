@@ -47,6 +47,7 @@ public class JdbcLinkRepository implements LinkRepository {
             response =
                 jdbcTemplate.queryForObject("select * from link where id = (?)", new LinkResponseMapper(), linkId);
             jdbcTemplate.update("delete from chat_links where chat_id = ? and link_id = ?", chatId, linkId);
+            jdbcTemplate.update("delete from link where id = ?", linkId);
         }
         return response;
     }
@@ -69,12 +70,13 @@ public class JdbcLinkRepository implements LinkRepository {
         );
     }
 
+
     @Override
     @Transactional(readOnly = true)
     public List<Link> getLinksToUpdate(OffsetDateTime time) {
         return jdbcTemplate.query(
-            "select * from link where checked_at < timezone('utc', now() - ?)",
-            new LinkMapper(), time
+                "select * from link where checked_at < ?",
+                new LinkMapper(), time
         );
     }
 

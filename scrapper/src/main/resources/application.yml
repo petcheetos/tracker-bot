@@ -1,8 +1,8 @@
 app:
-  database-access-type: jpa
+  database-access-type: jdbc
   scheduler:
     enable: true
-    interval: "PT5M"
+    interval: "P5M"
   github-base-url:
     base-url: "https://api.github.com/repos/"
   stackoverflow-base-url:
