@@ -126,12 +126,12 @@ API:
 ![image](https://github.com/user-attachments/assets/7abd173d-cd91-4fc8-b3da-f97869721bb5)
 
 
-При текущей конфигурации и локальном запуске Swagger ScrapperService доступен по http://localhost:8080/swagger-ui.html
+При текущей конфигурации Swagger ScrapperService доступен по пути /swagger-ui.html
 
 #### Bot service
 ![image](https://github.com/user-attachments/assets/676d1422-1433-483f-a868-6a90b2ae10d6)
 
-При текущей конфигурации и локальном запуске Swagger BotService доступен по http://localhost:8090/swagger-ui/index.html
+При текущей конфигурации Swagger BotService доступен по пути /swagger-ui/index.html
 
 Полный сценарий взаимодействий приведён в sequence-диаграмме:
 ![Sequence-диаграмма для основных команд](sequence_commands.png)
@@ -252,3 +252,24 @@ StackoverflowClient выполняет HTTP-запросы к StackOverflow API 
 
 
 ## СБОРКА
+Для соблюдения требования сборки, запуска тестов и запуска сервисов одной командой были добавлены несколько **Dockerfile**, **docker-compose.yml** и скрипт **start.sh**. Для запуска необходим Docker Engine, Docker Compose, Bash.
+
+1. Клонировать репозиторий
+```bash
+git clone https://github.com/petcheetos/tracker-bot.git
+```
+2. Перейти в папку проекта
+```bash
+cd tracker-bot
+```
+3. Сделать скрипт исполняемым
+```bash
+chmod +x start.sh
+```
+4. С помощью **@BotFather** в Telegram получить токен для своего бота
+5. Добавить токен в переменную окружения и запустить скрипт
+```bash
+TOKEN=<токен> ./start.sh
+```
+
+Скрипт произведет сборку, выполнит модульные и интеграционные тесты и запустит сервисы. 
