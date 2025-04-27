@@ -1,15 +1,16 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
 
-if [ -z "$TOKEN" ]; then
-  echo "Usage: TOKEN=<your_token> ./start.sh"
+if [[ -z "${TOKEN:-}" ]]; then
+  echo "Usage: TOKEN=<telegram_bot_token> ./start.sh"
   exit 1
 fi
 
-echo "=== 1) CI ==="
-docker-compose up --build --exit-code-from ci ci
+echo "Building and runnint tests..."
+docker compose build ci
+docker compose run --rm ci
 
-echo "=== 2) Starting runtime-services ==="
-docker-compose up -d scrapper bot
+echo "Running services..."
+docker compose up -d postgresql liquibase scrapper bot
 
-echo "scrapper → localhost:8080, bot → localhost:8090"
+echo "Done"

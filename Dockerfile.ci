@@ -1,21 +1,18 @@
-
 FROM maven:3.9.5-eclipse-temurin-21
 
-ENV DOCKER_HOST=unix:///var/run/docker.sock \
-    TESTCONTAINERS_RYUK_DISABLED=true
-
 RUN apt-get update \
-  && apt-get install -y docker.io \
-  && rm -rf /var/lib/apt/lists/*
+ && apt-get install -y --no-install-recommends docker.io \
+ && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /workspace
 
 COPY pom.xml .
-COPY bot/pom.xml bot/pom.xml
 COPY scrapper/pom.xml scrapper/pom.xml
-COPY dto/pom.xml dto/pom.xml
-
-RUN mvn dependency:go-offline -B
+COPY bot/pom.xml      bot/pom.xml
+COPY dto/pom.xml      dto/pom.xml
+RUN mvn -B -ntp dependency:go-offline
 
 COPY . .
-ENTRYPOINT ["mvn", "clean", "verify", "-B"]
+ENV DOCKER_HOST=unix:///var/run/docker.sock \
+    TESTCONTAINERS_RYUK_DISABLED=true
+ENTRYPOINT ["mvn","clean","verify","-B","-ntp"]

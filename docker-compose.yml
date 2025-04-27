@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.9"
 
 services:
   ci:
@@ -9,10 +9,9 @@ services:
       - ./:/workspace
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
-      - DOCKER_HOST=unix:///var/run/docker.sock
-      - TESTCONTAINERS_RYUK_DISABLED=true
-    depends_on:
-      []
+      DOCKER_HOST: unix:///var/run/docker.sock
+      TESTCONTAINERS_RYUK_DISABLED: "true"
+    network_mode: host
 
   postgresql:
     image: postgres:16
@@ -31,7 +30,7 @@ services:
       postgresql:
         condition: service_healthy
     command:
-      - --changelog-file=master.xml
+      - --changeLogFile=master.xml
       - --driver=org.postgresql.Driver
       - --url=jdbc:postgresql://postgresql:5432/scrapper
       - --username=postgres
@@ -43,25 +42,27 @@ services:
   scrapper:
     build:
       context: ./scrapper
-      dockerfile: Dockerfile
+      dockerfile: scrapper.Dockerfile
     depends_on:
       postgresql:
         condition: service_healthy
       liquibase:
         condition: service_completed_successfully
-      ci:
-        condition: service_completed_successfully
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresql:5432/scrapper
+      APP_BOT_BASE_URL_BASE_URL: http://bot:8090
     ports:
       - "8080:8080"
 
   bot:
     build:
       context: ./bot
-      dockerfile: Dockerfile
+      dockerfile: bot.Dockerfile
     depends_on:
       scrapper:
-        condition: service_healthy
+        condition: service_started
     environment:
-      - TOKEN=${TOKEN}
+      TOKEN: ${TOKEN}
+      APP_SCRAPPER_BASE_URL_BASE_URL: http://scrapper:8080
     ports:
       - "8090:8090"
